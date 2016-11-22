@@ -1,0 +1,19 @@
+<h1>List all posts</h1>
+<div class="search">
+    <%= form_tag posts_path, :method => 'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search" %>
+    </p>
+    <% end %>
+</div>
+
+<% @posts.each do |post| %>
+  <h2><%= link_to post.title, post_path(post) %></h2>
+  <div>
+    Snippet: <br>
+    <%= post.body_snippet %>
+  </div>
+  <hr>
+  <%#=redirecting to show page  %>
+<% end %>
