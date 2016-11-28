@@ -36,4 +36,13 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
+
+  resources :categories, except: [:destroy]
+
+  # get '/signup' => 'users#new'
+  # resources :users, expect: [:new]
+  #
+  # get '/login' => 'sessions#new'
+  # post '/login' => 'sessions#create'
+  # delete 'logout' => 'sessions#destroy'
 end

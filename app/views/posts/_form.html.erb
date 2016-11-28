@@ -1,16 +1,39 @@
-<%= form_for @post do |p| %>
-<div>
-  <%= p.label :title %>
-  <%= p.text_field :title %>
+<%= render 'shared/errors', obj: @post %>
+<div class='row'>
+  <div class='col-md-12'>
+    <%= form_for(@post, :html => {class: "form-horizontal", role: "form"}) do |p|%>
+      <div class= "form-group">
+        <div class="control-label col-sm-2">
+          <%= p.label :title %>
+          </div>
+          <div class="col-sm-8">
+            <%= p.text_field :title, class: "form-control", placeholder: "Title of article", autofocus: true%>
+          </div>
+        </div>
+        <div class= "form-group">
+          <div class="control-label col-sm-2">
+            <%= p.label :body %>
+          </div>
+          <div class="col-sm-8">
+            <%= p.text_area :body, rows: 10, class: "form-control", placeholder: "Body of article" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <%= p.label :category %>
+          </div>
+          <div class="col-sm-offset-2 col-sm-10" >
+            <%= p.collection_select :category, Category.all, :id, :title %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <%= p.submit class: 'btn btn-primary btn-sm'%>
+          </div>
+        </div>
+    <% end %>
+    <div class="col-sm-4 col-sm-offset-4">
+      [<%= link_to "Cancel request and return to all post listings", posts_path %>]
+    </div>
+  </div>
 </div>
-
-<div>
-  <%= p.label :body %>
-  <%= p.text_area :body %>
-</div>
-<div>
-  <%= p.label :category %>
-  <%= p.collection_select :category, Category.all, :id, :title %>
-</div>
-<%= p.submit %>
-<% end %>

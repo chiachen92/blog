@@ -1,0 +1,43 @@
+<!-- <% obj.each do |p| %>
+  <div class="row">
+    <div class="row-xs-8">
+      <div class="well well-lg">
+        <div class="post-title">
+          <%= link_to p.title, post_path(p) %>
+        </div>
+        <div class="post-body">
+
+          <%= truncate(p.body, length:120) %>
+          <% if p.categories.any? %>
+            <p>Categories: <%= render p.categories %></p>
+          <% end %>
+          <% if p.image_file_size %>
+            <%# image_tag p.image.url(:thumb) %>
+            <%= link_to image_tag(p.image.url(:thumb)), p.image.url, target: '_blank', class: "index-pic" %>
+          <% end %>
+          <% if logged_in? && current_user != p.user %>
+            <% if @like.present? %>
+              <%= link_to "Un-Like", like_path(@like), method: :delete, class: "btn btn-xs btn-primary" %>
+            <% else %>
+              <%= link_to "Like", post_likes_path(p), method: :post, class: "btn btn-xs btn-primary" %>
+            <% end %>
+          <% end %>
+          <h5>(<%= pluralize p.likes.count, "like" %>)</h5>
+          <div class="post-meta-details">
+            <small>Created by: <%= link_to "#{p.user.username}", user_path(p.user) if p.user %>,
+            <%= time_ago_in_words(p.created_at) %> ago,
+            last updated: <%= time_ago_in_words(p.updated_at) %> ago</small>
+          </div>
+        </div>
+        <% if logged_in? && (current_user == p.user || current_user.admin?) %>
+          <div class="post-actions">
+            <%= link_to 'Edit', edit_post_path(p), class: "btn btn-xs btn-primary" %>
+            <%= link_to 'Delete', post_path(p),
+                              method: :delete,
+                              data: {confirm: 'Are you sure?'}, class: "btn btn-xs btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %> -->

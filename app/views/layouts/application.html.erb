@@ -9,8 +9,13 @@
   </head>
 
   <body>
-    <div>
-    <%= link_to "Home", root_path %>|
+
+      <%= render 'layouts/navigation' %>
+      <%= render 'layouts/messages' %>
+
+
+
+    <!-- <%= link_to "Home", root_path %>|
     <%= link_to "About", about_path %>|
     <%= link_to "New Posts", new_post_path %>|
     <%= link_to "All Posts", posts_path %>|
@@ -31,9 +36,13 @@
             <%= link_to 'Sign up', new_user_path %>
             <%= link_to 'Sign In', new_session_path %>
 
-          <% end %>
-    </div>
-    <%= notice || alert  %>
+          <% end %> -->
+
+    <!-- <%= notice || alert  %> -->
+    <div class="container">
+      <%#= every page that get's rendered is now in the container class %>
     <%= yield %>
+    </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

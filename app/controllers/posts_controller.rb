@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+
+POSTS_PER_PAGE = 5
 before_action :authenticate_user, except: [:index, :show]
 # it's okay to show the user the list and the individual product info
 
@@ -39,6 +41,7 @@ before_action :authorize_access, only: [:update, :edit, :destroy]
     @post = Post.new post_params
     @post.user = current_user
     if @post.save
+      flash[:success] = "Post was successfully created"
       redirect_to post_path(@post)
       # redirect to show page with this post id
     else
@@ -54,7 +57,8 @@ before_action :authorize_access, only: [:update, :edit, :destroy]
   end
 
   def index
-    @posts = Post.order(created_at: :desc)
+    # @posts = Post.order(created_at: :desc)
+      @posts = Post.order(created_at: :desc).paginate(page: params[:page], per_page: POSTS_PER_PAGE)
     # @comments = Comment.order(created_at: :desc)
     # @posts = Post.search(params[:search])
   end
@@ -71,6 +75,7 @@ before_action :authorize_access, only: [:update, :edit, :destroy]
     post_params= params.require(:post).permit([:title, :body, :user_id])
     @post = Post.find params[:id]
     if (can? :modify, @post) && (@post.update post_params)
+      flash[:success] = "Post was successfully updated"
       redirect_to post_path(@post)
       # redirect to show page displaying the post with the updated changes
     else
@@ -83,6 +88,7 @@ before_action :authorize_access, only: [:update, :edit, :destroy]
     @post = Post.find params[:id]
     if can? :modify, @post
       @post.destroy
+      flash[:danger] = "Post was deleted"
       redirect_to posts_path
     else
       render :show
