@@ -57,7 +57,7 @@ group :development do
   gem 'hirb'
   gem 'rspec-rails'
   gem 'faker'
-  gem 'cancancan'
+
 
 
 end

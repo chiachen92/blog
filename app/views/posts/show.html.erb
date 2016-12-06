@@ -1,6 +1,6 @@
 <h2>Thanks for posting</h2>
 <h4>Title: <%=@post.title%><h4>
-  <div class="well col-sm-8">
+  <div class="well col-sm-12">
   <h4 class="center description"><strong>Body:</strong></h4>
   <hr>
   <%= simple_format(@post.body)%>
@@ -30,15 +30,17 @@
 
 
   <%#=error because need to have @post, com and edit_post_comment_path  %>
-
-  <%= link_to "Delete", post_comment_path(@post, com), method: :delete, data: {confirm: "Are you sure you want to delete this post?"} %>
-
+<div class = "comment-actions">
+  <%= link_to "Delete", post_comment_path(@post, com), method: :delete, data: {confirm: "Are you sure you want to delete this post?"}, class: "btn btn-xs btn-danger"%>
   <div>
   <% if user_signed_in? && com.favourited_by?(current_user)%>
     <%#= Notice: both `favourite_of` and `favourited_by` are methods we defined inside `comment.rb` %>
-    <%= link_to "UnFavourite", favourite_path(com.favourite_of(current_user)), method: :delete %>
+
+    <%= link_to "UnFavourite", favourite_path(com.favourite_of(current_user)), method: :delete, class: "btn btn-xs btn-primary" %>
   <% else %>
-    <%= link_to "Favourite", post_comment_favourites_path(@post, com), method: :post %>
+  <div>
+    <%= link_to "Favourite", post_comment_favourites_path(@post, com), method: :post, class: "btn btn-xs btn-primary" %><br>
+  </div>
   <% end %>
   </div>
 
