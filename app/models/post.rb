@@ -1,10 +1,11 @@
 class Post < ApplicationRecord
 
   belongs_to :category
-  validates :title, { length: {minimum: 3, maximum: 50}, presence: true, uniqueness: true }
 
-  validates :body, presence: true
   has_many :comments, -> {order(created_at: :DESC)}, dependent: :destroy
+
+  validates :title, presence: true, uniqueness: { case_sensitive: false, message: 'must be unique' }
+  validates :body, length: { minimum: 5 }
 
   belongs_to :user
 

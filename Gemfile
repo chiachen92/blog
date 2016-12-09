@@ -57,6 +57,8 @@ group :development do
   gem 'hirb'
   gem 'rspec-rails'
   gem 'faker'
+  gem 'will_paginate', '~> 3.1.0'
+  gem 'bootstrap-will_paginate'
 
 
 

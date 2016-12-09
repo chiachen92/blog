@@ -8,9 +8,10 @@ class SessionsController < ApplicationController
     @user = User.find_by_email params[:email]
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to root_path, notice: 'Signed In'
+      flash[:success] = 'Signed In'
+      redirect_to root_path
     else
-      flash.now[:alert] = 'Wrong credentials'
+      flash.now[:danger] = 'Wrong credentials'
       render :new
 
       # @user = user for that email exists and the password is correct
@@ -19,7 +20,8 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, notice: "signed out"
+    flash[:success] = "Signed out"
+    redirect_to root_path
   end
 end
 

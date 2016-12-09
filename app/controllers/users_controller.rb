@@ -12,7 +12,8 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       # pass this key :user_id to sessions hash and give it this value @user.id
     # only difference from a standard CRUD is that after the users successfully create their user record we add sessions[:user_id] = @user.id. This way we authenticate the user to our website using the session upon successful account creation.
-    redirect_to root_path, notice: "Thanks for signing up!"
+    flash[:success]= "Thanks for signing up!"
+    redirect_to root_path
     # redirect_to root_path(@user)
     # redirect to user create path
     else

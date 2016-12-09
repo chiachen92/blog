@@ -1,5 +1,6 @@
 <div class="center jumbotron">
   <h1>JEN'S BLOG</h1>
 
-<%= link_to "Sign up now", new_user_path, class: "btn btn-primary btn-lg" %></li>
+<li><% unless user_signed_in? %><%= link_to "Sign up now", new_user_path, class: "btn btn-primary btn-lg" %></li>
+<% end %>
 </div>

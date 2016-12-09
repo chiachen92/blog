@@ -57,8 +57,14 @@ before_action :authorize_access, only: [:update, :edit, :destroy]
   end
 
   def index
-    # @posts = Post.order(created_at: :desc)
+    if params[:search]
+      @posts = Post.search(params[:search]).order(created_at: :desc).paginate(page: params[:page], per_page: POSTS_PER_PAGE)
+    else
       @posts = Post.order(created_at: :desc).paginate(page: params[:page], per_page: POSTS_PER_PAGE)
+    end
+
+    # @posts = Post.order(created_at: :desc)
+      # @posts = Post.order(created_at: :desc).paginate(page: params[:page], per_page: POSTS_PER_PAGE)
     # @comments = Comment.order(created_at: :desc)
     # @posts = Post.search(params[:search])
   end
