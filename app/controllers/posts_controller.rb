@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
 POSTS_PER_PAGE = 5
-before_action :authenticate_user, except: [:index, :show]
+# before_action :authenticate_user, except: [:index, :show]
 # it's okay to show the user the list and the individual product info
 
 before_action :authorize_access, only: [:update, :edit, :destroy]
